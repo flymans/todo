@@ -1,0 +1,13 @@
+.finished {
+  text-decoration: line-through;
+}
+
+.toDoItem {
+  display: inline-block;
+  background: #e0e1e2 none;
+  cursor: pointer;
+}
+
+.toDoContainer {
+  display: inline-block;
+}
