@@ -9,12 +9,14 @@ const TaskList = ({ list, taskChangeState, deleteTask }) => {
     <ul>
       {list.map(toDoItem => (
         <List key={toDoItem.id}>
-          <div className="toDoContainer">
-            <div id={`toDoItem_${toDoItem.id}`} className={cn({
-              toDoItem: true,
+          <div className="todo-item__container">
+            <div id={`todo-item__${toDoItem.id}`} className={cn({
+              'todo-item': true,
               [toDoItem.state]: true,
             })} onClick={taskChangeState(toDoItem)}>{toDoItem.value}</div>
-            <label htmlFor={`toDoItem_${toDoItem.id}`}><Button onClick={deleteTask(toDoItem.id)} size='mini' icon='close icon' /></label>
+            <label className="todo-item__close-button" htmlFor={`todo-item_${toDoItem.id}`}>
+              <Button onClick={deleteTask(toDoItem.id)} circular floated='right' icon='trash' />
+            </label>
           </div>
         </List>
       ))}

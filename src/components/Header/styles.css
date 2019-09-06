@@ -1,13 +1,9 @@
 .main-header { 
   box-shadow: 0 2px 1px 1px rgba(5, 56, 107, 0.5);
   margin: 16px 0;
-  color: #05386b;
 }
 
 .main-header__title {
   display: inline-block;
 }
 
-.main-header a {
-  text-align: right;
-}

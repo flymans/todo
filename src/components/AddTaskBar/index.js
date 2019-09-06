@@ -2,6 +2,7 @@ import React from 'react';
 import TaskList from './TaskList';
 import _ from 'lodash';
 import update from 'immutability-helper';
+import { Input } from 'semantic-ui-react';
 
 export default class AddTaskBar extends React.Component {
   state = {
@@ -43,8 +44,7 @@ export default class AddTaskBar extends React.Component {
     const { text, toDoList } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={text} onChange={this.handleChange} required placeholder="Your task..."/>
-        <input type="submit" value='Add task' />
+        <Input type="text" value={text} onChange={this.handleChange} action='Add task' required placeholder="Your task..."/>
         {toDoList.length > 0 && <TaskList list={toDoList} taskChangeState={this.taskChangeState} deleteTask={this.deleteTask}/> }
       </form>
     );
