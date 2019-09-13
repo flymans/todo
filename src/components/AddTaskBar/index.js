@@ -2,12 +2,14 @@ import React from 'react';
 import TaskList from './TaskList';
 import _ from 'lodash';
 import update from 'immutability-helper';
-import { Input } from 'semantic-ui-react';
+import { Input, Button } from 'semantic-ui-react';
+import './styles.css';
 
 export default class AddTaskBar extends React.Component {
   state = {
     text: '',
     toDoList: [],
+    status: 'all',
   }
 
   handleChange = ({ target: { value } }) => {
@@ -25,8 +27,8 @@ export default class AddTaskBar extends React.Component {
   taskChangeState = (toDoItem) => () => {
     const { toDoList } = this.state;
     const mapping = {
-      active: 'finished',
-      finished: 'active',
+      active: 'completed',
+      completed: 'active',
     }
     const updatedToDoItem = { ...toDoItem, state: mapping[toDoItem.state] };
     const index = toDoList.indexOf(toDoItem);
@@ -39,13 +41,56 @@ export default class AddTaskBar extends React.Component {
     const updatedList = toDoList.filter(toDoItem => toDoItem.id !== id);
     this.setState({ toDoList: updatedList });
   }
+  
+  taskFilterAll = (e) => {
+    e.preventDefault();
+    this.setState({ status: 'all' });
+  }
+
+  taskFilterActive = (e) => {
+    e.preventDefault();
+    this.setState({ status: 'active' });
+  }
+
+  taskFilterCompleted = (e) => {
+    e.preventDefault();
+    this.setState({ status: 'completed' });
+  }
 
   render() {
-    const { text, toDoList } = this.state;
+    const { text, toDoList, status } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input type="text" value={text} onChange={this.handleChange} action='Add task' required placeholder="Your task..."/>
-        {toDoList.length > 0 && <TaskList list={toDoList} taskChangeState={this.taskChangeState} deleteTask={this.deleteTask}/> }
+      <form className="taskBar" onSubmit={this.handleSubmit}>
+        <Button.Group className="filter-list">
+          <Button
+            disabled={status === 'all'}
+            onClick={this.taskFilterAll}>All
+          </Button>
+          <Button
+            disabled={status === 'active'}
+            onClick={this.taskFilterActive}>Active
+          </Button>
+          <Button
+            disabled={status === 'completed'}
+            onClick={this.taskFilterCompleted}>Completed
+          </Button>
+        </Button.Group>
+        <Input
+          className="taskBar"
+          type="text"
+          value={text}
+          onChange={this.handleChange}
+          action='Add task'
+          required
+          placeholder="Your task..."
+        />
+        {toDoList.length > 0 && 
+        <TaskList
+          list={toDoList}
+          status={status}
+          taskChangeState={this.taskChangeState}
+          deleteTask={this.deleteTask}
+        /> }
       </form>
     );
   }

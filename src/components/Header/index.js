@@ -9,7 +9,7 @@ class Header extends React.Component {
             <i className="list alternate outline icon"></i>
             Todo App
           </h1>
-          <a href="https://github.com/flymans"><i class="huge github icon"></i></a>
+          <a href="https://github.com/flymans"><i className="huge github icon"></i></a>
       </header>
     )
   }
