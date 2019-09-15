@@ -36,7 +36,8 @@ export default class AddTaskBar extends React.Component {
     this.setState({ toDoList: updatedList });
   }
   
-  deleteTask = (id) => () => {
+  deleteTask = (id) => (e) => {
+    e.preventDefault();
     const { toDoList } = this.state;
     const updatedList = toDoList.filter(toDoItem => toDoItem.id !== id);
     this.setState({ toDoList: updatedList });
@@ -55,6 +56,17 @@ export default class AddTaskBar extends React.Component {
   taskFilterCompleted = (e) => {
     e.preventDefault();
     this.setState({ status: 'completed' });
+  }
+
+  componentDidMount() {
+    const lsToDoList = JSON.parse(localStorage.getItem('toDoList')); 
+    if (lsToDoList.length > 0) {
+      this.setState({ toDoList: lsToDoList});
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('toDoList', JSON.stringify(this.state.toDoList));
   }
 
   render() {

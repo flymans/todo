@@ -12,8 +12,6 @@ const TaskList = ({ list, taskChangeState, deleteTask, status }) => {
         return renderTask(list);
       }
       case 'active': {
-        console.log(status);
-        console.log(list.filter(item => item.state === status));
         return renderTask(list.filter(item => item.state === status));
       }
       case 'completed': {
@@ -36,7 +34,7 @@ const TaskList = ({ list, taskChangeState, deleteTask, status }) => {
           </label>
         </div>
       </List>
-    ))
+    ));
 
   return (
     <ul>
