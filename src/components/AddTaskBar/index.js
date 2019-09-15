@@ -60,8 +60,9 @@ export default class AddTaskBar extends React.Component {
 
   componentDidMount() {
     const lsToDoList = JSON.parse(localStorage.getItem('toDoList')); 
-    if (lsToDoList.length > 0) {
-      this.setState({ toDoList: lsToDoList});
+    if (lsToDoList) {
+      const mappedList = lsToDoList.map(toDoItem => ({...toDoItem, id: _.uniqueId()}));
+      this.setState({toDoList: mappedList});
     }
   }
 
