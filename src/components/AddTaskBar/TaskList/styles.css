@@ -1,11 +1,19 @@
+.taskForm  {
+  width: 50%;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .todo-list {
   padding: 0;
 }
 
 .todo-item__container {
   display: inline-block;
-  width: 50%;
-  background-color: #edf5e1;
+  width: 100%;
+  background: #edf5e1;
   border: 5px solid #05386b;
   padding: 0.5rem;
 }

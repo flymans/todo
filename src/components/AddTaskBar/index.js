@@ -15,9 +15,14 @@ export default class AddTaskBar extends React.Component {
   handleChange = ({ target: { value } }) => {
     this.setState({ text: value });
   }
+  
+  handleKeyDown = ({ key }) => {
+    if (key === 'Enter' && this.state.text.length > 0) {
+      this.handleSubmit();
+    }
+  }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = () => {
     const { text, toDoList } = this.state;
     const toDoItem = {id: _.uniqueId(), value: text, state: 'active'}
     const updatedList = [...toDoList, toDoItem];
@@ -73,8 +78,8 @@ export default class AddTaskBar extends React.Component {
   render() {
     const { text, toDoList, status } = this.state;
     return (
-      <form className="taskBar" onSubmit={this.handleSubmit}>
-        <Button.Group className="filter-list">
+      <form className="taskForm" onSubmit={this.handleSubmit}>
+        <Button.Group fluid className="filter-list">
           <Button
             disabled={status === 'all'}
             onClick={this.taskFilterAll}>All
@@ -89,10 +94,12 @@ export default class AddTaskBar extends React.Component {
           </Button>
         </Button.Group>
         <Input
+          fluid
           className="taskBar"
           type="text"
           value={text}
           onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
           action='Add task'
           required
           placeholder="Your task..."

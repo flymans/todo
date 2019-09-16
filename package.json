@@ -36,10 +36,14 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "devDependencies": {
-    "eslint": "^6.3.0",
-    "eslint-plugin-react": "^7.14.3"
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0"
   },
   "author": "Alex Panteleev",
   "license": "ISC",
-  "homepage" : "https://flymans.github.io/todo/"
+  "homepage": "https://flymans.github.io/todo/"
 }
