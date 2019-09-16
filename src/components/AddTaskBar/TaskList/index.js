@@ -37,7 +37,7 @@ const TaskList = ({ list, taskChangeState, deleteTask, status }) => {
     ));
 
   return (
-    <ul>
+    <ul className="todo-list">
       {filterList(list)}
     </ul>
   );

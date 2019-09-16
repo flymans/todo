@@ -1,3 +1,14 @@
 .filter-list {
   display: block !important;
+  margin: 0.5rem !important;
 }
+/* .ui.buttons .button {
+  margin: 0 0.5rem;
+} */
+
+.ui.button,
+.ui.button:active {
+  background-color: #edf5e1;
+  color: #05386b;
+}
+

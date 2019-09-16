@@ -1,15 +1,19 @@
+.todo-list {
+  padding: 0;
+}
+
 .todo-item__container {
   display: inline-block;
   width: 50%;
-  background: #edf5e1;
+  background-color: #edf5e1;
   border: 5px solid #05386b;
-  padding: 8px;
+  padding: 0.5rem;
 }
 
 .todo-item {
   display: inline-block;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: bolder;
   margin: 0 auto;
   line-height: 1;
