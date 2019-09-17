@@ -1,6 +1,7 @@
 .ui.button,
 .ui.button:active,
-.ui.button:hover {
+.ui.button:hover,
+.ui.button:focus {
   background-color: #edf5e1;
   color: #05386b;
 }

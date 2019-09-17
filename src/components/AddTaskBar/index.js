@@ -16,26 +16,23 @@ export default class AddTaskBar extends React.Component {
     this.setState({ text: value });
   }
   
-  handleKeyDown = ({ key }) => {
-    if (key === 'Enter' && this.state.text.length > 0) {
-      this.handleSubmit();
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter' && this.state.text.length > 0) {
+      this.handleSubmit(e);
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     const { text, toDoList } = this.state;
-    const toDoItem = {id: _.uniqueId(), value: text, state: 'active'}
+    const toDoItem = {id: _.uniqueId(), value: text, active: true}
     const updatedList = [...toDoList, toDoItem];
     this.setState({ text: '', toDoList: updatedList });
   }
 
   taskChangeState = (toDoItem) => () => {
     const { toDoList } = this.state;
-    const mapping = {
-      active: 'completed',
-      completed: 'active',
-    }
-    const updatedToDoItem = { ...toDoItem, state: mapping[toDoItem.state] };
+    const updatedToDoItem = { ...toDoItem, active: !toDoItem.active };
     const index = toDoList.indexOf(toDoItem);
     const updatedList = update(toDoList, { [index]: { $set: { ...updatedToDoItem } } });
     this.setState({ toDoList: updatedList });
@@ -47,32 +44,48 @@ export default class AddTaskBar extends React.Component {
     const updatedList = toDoList.filter(toDoItem => toDoItem.id !== id);
     this.setState({ toDoList: updatedList });
   }
-  
-  taskFilterAll = (e) => {
+
+  taskFilter = (e) => {
     e.preventDefault();
-    this.setState({ status: 'all' });
+    const filterOption = e.target.textContent.toLowerCase();
+    this.setState({ status: filterOption });
   }
 
-  taskFilterActive = (e) => {
-    e.preventDefault();
-    this.setState({ status: 'active' });
-  }
+  filterList = () => {
+    const { toDoList, status } = this.state;
+    switch (status) {
+      case 'all': {
+        return toDoList;
+      }
+      case 'active': {
+        return toDoList.filter(item => item.active);
+      }
+      case 'completed': {
+        return toDoList.filter(item => !item.active);
+      }
+      default: 
+        throw new Error('Unexpected error');
+    }
+  };
 
-  taskFilterCompleted = (e) => {
-    e.preventDefault();
-    this.setState({ status: 'completed' });
+  onUnload = (e) => {
+    const { toDoList, status } = this.state;
+    localStorage.setItem('toDoList', JSON.stringify(toDoList.map(toDoItem => ({ value: toDoItem.value, state: toDoItem.state }))));
+    localStorage.setItem('status', status);
   }
 
   componentDidMount() {
-    const lsToDoList = JSON.parse(localStorage.getItem('toDoList')); 
+    const lsToDoList = JSON.parse(localStorage.getItem('toDoList'));
+    const lsStatus = localStorage.getItem('status');
+    window.addEventListener("beforeunload", this.onUnload);
     if (lsToDoList) {
       const mappedList = lsToDoList.map(toDoItem => ({...toDoItem, id: _.uniqueId()}));
-      this.setState({toDoList: mappedList});
+      this.setState({toDoList: mappedList, status: lsStatus});
     }
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('toDoList', JSON.stringify(this.state.toDoList));
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.onUnload)
   }
 
   render() {
@@ -82,15 +95,15 @@ export default class AddTaskBar extends React.Component {
         <Button.Group fluid className="filter-list">
           <Button
             disabled={status === 'all'}
-            onClick={this.taskFilterAll}>All
+            onClick={this.taskFilter}>All
           </Button>
           <Button
             disabled={status === 'active'}
-            onClick={this.taskFilterActive}>Active
+            onClick={this.taskFilter}>Active
           </Button>
           <Button
             disabled={status === 'completed'}
-            onClick={this.taskFilterCompleted}>Completed
+            onClick={this.taskFilter}>Completed
           </Button>
         </Button.Group>
         <Input
@@ -106,8 +119,7 @@ export default class AddTaskBar extends React.Component {
         />
         {toDoList.length > 0 && 
         <TaskList
-          list={toDoList}
-          status={status}
+          list={this.filterList()}
           taskChangeState={this.taskChangeState}
           deleteTask={this.deleteTask}
         /> }

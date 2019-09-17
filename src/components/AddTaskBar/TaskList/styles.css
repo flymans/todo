@@ -27,6 +27,6 @@
   line-height: 1;
 }
 
-.completed {
+.todo-item:not(.active) {
   text-decoration: line-through;
 }
