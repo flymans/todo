@@ -1,9 +1,10 @@
 import React from 'react';
+import update from 'immutability-helper';
+import _ from 'lodash';
+import {Button, Form} from 'semantic-ui-react';
 import TaskList from './TaskList';
 import Footer from '../Footer';
-import _ from 'lodash';
-import update from 'immutability-helper';
-import {Button, Form} from 'semantic-ui-react';
+
 import './styles.css';
 
 export default class AddTaskBar extends React.Component {
@@ -11,8 +12,27 @@ export default class AddTaskBar extends React.Component {
         text: '',
         toDoList: [],
         status: 'all',
-        counter: 0
+        counter: 0dssa
     };
+
+    componentDidMount() {
+        const lsToDoList = JSON.parse(localStorage.getItem('toDoList'));
+        const lsStatus = localStorage.getItem('status');
+        window.addEventListener('beforeunload', this.onUnload);
+        if (lsToDoList) {
+            const mappedList = lsToDoList.map(toDoItem => ({
+                ...toDoItem,
+                id: _.uniqueId()
+            }));
+            const counter = mappedList.filter(toDoItem => toDoItem.active)
+                .length;
+            this.setState({toDoList: mappedList, status: lsStatus, counter});
+        }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('beforeunload', this.onUnload);
+    }
 
     handleChange = (e, {name, value}) => this.setState({[name]: value});
 
@@ -21,7 +41,7 @@ export default class AddTaskBar extends React.Component {
         const {text, toDoList} = this.state;
         const toDoItem = {id: _.uniqueId(), value: text, active: true};
         const updatedList = [...toDoList, toDoItem];
-        const counter = updatedList.filter(toDoItem => toDoItem.active).length;
+        const counter = updatedList.filter(item => item.active).length;
         this.setState({text: '', toDoList: updatedList, counter});
     };
 
@@ -32,7 +52,7 @@ export default class AddTaskBar extends React.Component {
         const updatedList = update(toDoList, {
             [index]: {$set: {...updatedToDoItem}}
         });
-        const counter = updatedList.filter(toDoItem => toDoItem.active).length;
+        const counter = updatedList.filter(item => item.active).length;
         this.setState({toDoList: updatedList, counter});
     };
 
@@ -67,7 +87,7 @@ export default class AddTaskBar extends React.Component {
         }
     };
 
-    onUnload = e => {
+    onUnload = () => {
         const {toDoList, status} = this.state;
         localStorage.setItem(
             'toDoList',
@@ -80,25 +100,6 @@ export default class AddTaskBar extends React.Component {
         );
         localStorage.setItem('status', status);
     };
-
-    componentDidMount() {
-        const lsToDoList = JSON.parse(localStorage.getItem('toDoList'));
-        const lsStatus = localStorage.getItem('status');
-        window.addEventListener('beforeunload', this.onUnload);
-        if (lsToDoList) {
-            const mappedList = lsToDoList.map(toDoItem => ({
-                ...toDoItem,
-                id: _.uniqueId()
-            }));
-            const counter = mappedList.filter(toDoItem => toDoItem.active)
-                .length;
-            this.setState({toDoList: mappedList, status: lsStatus, counter});
-        }
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('beforeunload', this.onUnload);
-    }
 
     render() {
         const {text, toDoList, status, counter} = this.state;
