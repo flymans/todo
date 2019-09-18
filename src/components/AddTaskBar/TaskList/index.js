@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable object-curly-newline */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import cn from 'classnames';
 import './styles.css';
@@ -14,7 +11,7 @@ const TaskList = ({ list, taskChangeState, deleteTask }) => {
         <div
           id={`todo-item__${toDoItem.id}`}
           className={cn({
-            'todo-item': true,
+            'todo-toDoItem': true,
             active: toDoItem.active,
           })}
           onClick={taskChangeState(toDoItem)}

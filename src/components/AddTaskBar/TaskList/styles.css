@@ -1,13 +1,14 @@
-.taskForm  {
+.task-list  {
   width: 50%;
   display: flex;
-  margin: auto;
+  margin: 0 auto;
   flex-direction: column;
   justify-content: center;
 }
 
 .todo-list {
   padding: 0;
+  margin-bottom: 0;
 }
 
 .todo-item__container {
@@ -18,7 +19,15 @@
   padding: 0.5rem;
 }
 
-.todo-item {
+.todo-item__container {
+  display: inline-block;
+  width: 100%;
+  background: #edf5e1;
+  border: 5px solid #05386b;
+  padding: 0.5rem;
+}
+
+.todo-toDoItem {
   display: inline-block;
   cursor: pointer;
   font-size: 2rem;
@@ -27,6 +36,7 @@
   line-height: 1;
 }
 
-.todo-item:not(.active) {
+
+.todo-toDoItem:not(.active) {
   text-decoration: line-through;
 }
