@@ -12,7 +12,7 @@ export default class AddTaskBar extends React.Component {
         text: '',
         toDoList: [],
         status: 'all',
-        counter: 0dssa
+        counter: 0
     };
 
     componentDidMount() {
@@ -62,6 +62,12 @@ export default class AddTaskBar extends React.Component {
         const updatedList = toDoList.filter(toDoItem => toDoItem.id !== id);
         const counter = updatedList.filter(toDoItem => toDoItem.active).length;
         this.setState({toDoList: updatedList, counter});
+    };
+
+    deleteFinishedTasks = () => {
+        const {toDoList} = this.state;
+        const updatedList = toDoList.filter(toDoItem => toDoItem.active);
+        this.setState({toDoList: updatedList});
     };
 
     taskFilter = e => {
@@ -144,7 +150,16 @@ export default class AddTaskBar extends React.Component {
                         />
                     )}
                 </Form>
-                {toDoList.length > 0 && <Footer counter={counter} />}
+                {this.filterList().length > 0 && (
+                    <Footer
+                        clear={this.deleteFinishedTasks}
+                        counter={counter}
+                        showButton={
+                            toDoList.filter(toDoItem => !toDoItem.active)
+                                .length > 0
+                        }
+                    />
+                )}
             </div>
         );
     }

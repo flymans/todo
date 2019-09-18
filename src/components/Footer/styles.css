@@ -1,8 +1,13 @@
 .main-footer {
-  display: inline-block;
-  width: 100%;
-  background: #edf5e1;
-  border: 5px solid #05386b;
-  border-top: 0;
-  padding: 0.3rem;
+    display: inline-block;
+    width: 100%;
+    background: #edf5e1;
+    border: 5px solid #05386b;
+    border-top: 0;
+    padding: 0.3rem;
+}
+
+.main-footer .button {
+    margin-left: 0.5rem;
+    box-shadow: 1px 1px 1px 1px #05386b;
 }

@@ -1,5 +1,5 @@
 {
-    "extends": ["airbnb", "prettier"],
+    "extends": ["airbnb", "prettier", "prettier/react"],
     "plugins": ["prettier"],
     "rules": {
         "react/jsx-filename-extension": [
@@ -12,7 +12,10 @@
         "import/newline-after-import": "error",
         "react/jsx-indent": [2, 4],
         "react/jsx-indent-props": [2, 4],
-        "react/state-in-constructor": 0
+        "react/state-in-constructor": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "jsx-a11y/label-has-associated-control": 0
     },
     "globals": {
         "window": true,
