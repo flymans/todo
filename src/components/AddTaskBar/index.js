@@ -19,7 +19,7 @@ export default class AddTaskBar extends React.Component {
         const lsToDoList = JSON.parse(localStorage.getItem('toDoList'));
         const lsStatus = localStorage.getItem('status');
         window.addEventListener('beforeunload', this.onUnload);
-        if (lsToDoList) {
+        if (lsToDoList && lsStatus) {
             const mappedList = lsToDoList.map(toDoItem => ({
                 ...toDoItem,
                 id: _.uniqueId()
@@ -28,6 +28,7 @@ export default class AddTaskBar extends React.Component {
                 .length;
             this.setState({toDoList: mappedList, status: lsStatus, counter});
         }
+        this.setState({status: 'all'});
     }
 
     componentWillUnmount() {

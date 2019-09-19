@@ -1,7 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
-import {Button, List} from 'semantic-ui-react';
+import {List} from 'semantic-ui-react';
+import ModalDelete from './ModalDelete';
 import './styles.css';
 
 const TaskList = ({list, taskChangeState, deleteTask}) => {
@@ -13,7 +14,7 @@ const TaskList = ({list, taskChangeState, deleteTask}) => {
                         type="checkbox"
                         id={`todo-item__${toDoItem.id}`}
                         checked={!toDoItem.active}
-                        onClick={taskChangeState(toDoItem)}
+                        onChange={taskChangeState(toDoItem)}
                     />
                     <label
                         htmlFor={`todo-item__${toDoItem.id}`}
@@ -24,12 +25,7 @@ const TaskList = ({list, taskChangeState, deleteTask}) => {
                     >
                         {toDoItem.value}
                     </label>
-                    <Button
-                        onClick={deleteTask(toDoItem.id)}
-                        circular
-                        floated="right"
-                        icon="trash"
-                    />
+                    <ModalDelete deleteTask={deleteTask} itemId={toDoItem.id} />
                 </div>
             </List>
         ));
