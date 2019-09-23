@@ -5,7 +5,9 @@ import './styles.css';
 
 const Footer = ({counter, clear, showButton}) => (
     <footer className="main-footer">
-        <span className="main-footer__counter">{counter} task left</span>
+        <span className="main-footer__counter">
+            {counter} task{counter > 1 ? 's' : ''} left
+        </span>
         {showButton && (
             <Button className="main-footer__clear" onClick={clear}>
                 Clear finished tasks
