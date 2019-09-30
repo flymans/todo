@@ -1,15 +1,9 @@
 .task-list {
-    width: 70%;
+    width: 90%;
     display: flex;
     margin: 0 auto;
     flex-direction: column;
     justify-content: center;
-}
-
-@media (max-width: 40rem) {
-    .task-list {
-        width: 90%;
-    }
 }
 
 .todo-list {
@@ -18,15 +12,7 @@
 }
 
 .todo-item__container {
-    display: inline-block;
-    width: 100%;
-    background: #edf5e1;
-    border: 5px solid #05386b;
-    padding: 0.5rem;
-}
-
-.todo-item__container {
-    display: inline-block;
+    display: flex;
     width: 100%;
     background: #edf5e1;
     border: 5px solid #05386b;
@@ -78,7 +64,6 @@ input[type='checkbox']:checked + label:before {
 }
 
 .todo-toDoItem {
-    display: inline-block;
     cursor: pointer;
     font-size: 2rem;
     font-weight: bolder;
@@ -88,4 +73,10 @@ input[type='checkbox']:checked + label:before {
 
 .todo-toDoItem:not(.active) {
     text-decoration: line-through;
+}
+
+@media (min-width: 40rem) {
+    .task-list {
+        width: 70%;
+    }
 }

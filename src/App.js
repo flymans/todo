@@ -4,12 +4,12 @@ import Header from './components/Header';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <AddTaskBar />
-    </div>
-  );
+    return (
+        <div className="App">
+            <Header />
+            <AddTaskBar />
+        </div>
+    );
 }
 
 export default App;

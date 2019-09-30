@@ -1,9 +1,7 @@
-.main-header { 
-  box-shadow: 0 2px 1px 1px rgba(5, 56, 107, 0.5);
-  margin: 1rem auto;
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 1px 1px rgba(5, 56, 107, 0.5);
+    margin: 1rem auto;
 }
-
-.main-header__title {
-  display: inline-block;
-}
-

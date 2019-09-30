@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {Button, Header, Icon, Modal} from 'semantic-ui-react';
 
 const ModalDelete = ({deleteTask, itemId}) => {
-    const [modal, handleModal] = useState({modalOpen: false});
+    const [modalOpen, handleModal] = useState(false);
 
-    const handleOpen = () => handleModal({...modal, modalOpen: true});
-    const handleClose = () => handleModal({...modal, modalOpen: false});
+    const handleOpen = () => handleModal(true);
+    const handleClose = () => handleModal(false);
 
     return (
         <Modal
@@ -20,7 +20,7 @@ const ModalDelete = ({deleteTask, itemId}) => {
                 />
             }
             closeIcon
-            open={modal.modalOpen}
+            open={modalOpen}
             onClose={handleClose}
         >
             <Header icon="trash" content="Delete task" />
