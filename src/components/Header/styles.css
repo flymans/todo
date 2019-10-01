@@ -1,7 +1,21 @@
 .main-header {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+
+    display: grid;
+    grid-template-areas: '. header logo';
+    align-items: center;
+
     box-shadow: 0 2px 1px 1px rgba(5, 56, 107, 0.5);
     margin: 1rem auto;
+}
+
+.main-header__title {
+    margin: 0;
+    grid-area: header;
+}
+
+.main-header__logo {
+    grid-area: logo;
 }
