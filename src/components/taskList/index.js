@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import {List} from 'semantic-ui-react';
-import ModalDelete from './ModalDelete';
+import ModalDelete from './modalDelete';
 import './styles.css';
 
 const TaskList = ({list, taskChangeState, deleteTask}) => {

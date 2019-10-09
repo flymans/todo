@@ -2,8 +2,8 @@ import React from 'react';
 import update from 'immutability-helper';
 import _ from 'lodash';
 import {Button, Form} from 'semantic-ui-react';
-import TaskList from './TaskList';
-import Footer from '../Footer';
+import TaskList from '../taskList';
+import Footer from '../footer';
 
 import './styles.css';
 

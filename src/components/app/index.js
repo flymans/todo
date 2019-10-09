@@ -1,7 +1,6 @@
 import React from 'react';
-import AddTaskBar from './components/AddTaskBar';
-import Header from './components/Header';
-import './App.css';
+import AddTaskBar from '../addTaskBar';
+import Header from '../header';
 
 function App() {
     return (
